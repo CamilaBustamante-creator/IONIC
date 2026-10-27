@@ -1,18 +1,35 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Lista de Reproducción</ion-title>
+    <ion-title>Mi App de Música</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
 
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>Card Title</ion-card-title>
-    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-  </ion-card-header>
+<ion-content [fullscreen]="true" class="ion-padding">
 
-  <ion-card-content>
-    <ion-button>Default</ion-button> <ion-button [disabled]="true">Disabled</ion-button>
-  </ion-card-content>
-</ion-card>
+  <!-- Buscador con ngModel -->
+  <ion-searchbar
+    [(ngModel)]="searchTerm"
+    (ionInput)="buscar()"
+    [debounce]="500"
+    placeholder="Busca un artista, álbum o canción...">
+  </ion-searchbar>
+
+  <!-- Lista de resultados -->
+  <ion-list>
+    <ion-item *ngFor="let track of tracks">
+      <ion-avatar slot="start">
+        <img [src]="track.album.cover_medium" alt="Carátula" />
+      </ion-avatar>
+
+      <ion-label>
+        <h2>{{ track.title }}</h2>
+        <p>{{ track.artist.name }}</p>
+      </ion-label>
+
+      <ion-button slot="end" fill="clear" (click)="playPreview(track)">
+        {{ playingTrackId === track.id ? '⏸️' : '▶️' }}
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ListaReproduccionComponent } from './components/lista-reproduccion/lista-reproduccion.component';
+
 
 const routes: Routes = [
   {
@@ -10,6 +12,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
+  },
+  {
+    path: 'Lista',
+    component: ListaReproduccionComponent
   },
 ];
 
